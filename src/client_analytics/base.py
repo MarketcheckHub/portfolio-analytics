@@ -1,9 +1,14 @@
-from typing import Dict, Any
+from abc import ABC, abstractmethod
 
 
-class BaseAnalyticsClient:
-    def __init__(self, config: Dict[str, Any], **kwargs):
-        self.config = config
-        self._client = None
+class BaseAnalytics(ABC):
+
+    def __init__(self, input_fn, client, **kwargs):
+        self._input_fn = input_fn
+        self._client = client
         self._kwargs = kwargs
+
+    @abstractmethod
+    def perform_analytics(self):
+        pass
 
